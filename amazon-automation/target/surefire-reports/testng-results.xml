@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-06-09T11:35:08 IST" name="AmazonAutomationSuite" finished-at="2026-06-09T11:35:58 IST" duration-ms="50507">
+    <groups>
+    </groups>
+    <test started-at="2026-06-09T11:35:08 IST" name="GalaxyTest" finished-at="2026-06-09T11:35:49 IST" duration-ms="41552">
+      <class name="tests.GalaxyTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.GalaxyTest@61df66b6]" started-at="2026-06-09T11:35:08 IST" name="setUp" finished-at="2026-06-09T11:35:17 IST" duration-ms="9545" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="searchAndAddGalaxyToCart()[pri:0, instance:tests.GalaxyTest@61df66b6]" started-at="2026-06-09T11:35:17 IST" name="searchAndAddGalaxyToCart" finished-at="2026-06-09T11:35:48 IST" duration-ms="31016" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchAndAddGalaxyToCart -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.GalaxyTest@61df66b6]" started-at="2026-06-09T11:35:48 IST" name="tearDown" finished-at="2026-06-09T11:35:49 IST" duration-ms="878" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.GalaxyTest -->
+    </test> <!-- GalaxyTest -->
+    <test started-at="2026-06-09T11:35:08 IST" name="iPhoneTest" finished-at="2026-06-09T11:35:58 IST" duration-ms="50507">
+      <class name="tests.IPhoneTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.IPhoneTest@10e41621]" started-at="2026-06-09T11:35:08 IST" name="setUp" finished-at="2026-06-09T11:35:17 IST" duration-ms="9545" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="searchAndAddIPhoneToCart()[pri:0, instance:tests.IPhoneTest@10e41621]" started-at="2026-06-09T11:35:17 IST" name="searchAndAddIPhoneToCart" finished-at="2026-06-09T11:35:58 IST" duration-ms="40174" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchAndAddIPhoneToCart -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.IPhoneTest@10e41621]" started-at="2026-06-09T11:35:58 IST" name="tearDown" finished-at="2026-06-09T11:35:58 IST" duration-ms="683" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- tests.IPhoneTest -->
+    </test> <!-- iPhoneTest -->
+  </suite> <!-- AmazonAutomationSuite -->
+</testng-results>
