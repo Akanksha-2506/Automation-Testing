@@ -17,7 +17,7 @@ public class IPhoneTest {
     }
 
     @Test
-    public void searchAndAddIPhoneToCart() {
+    public void searchAndAddIPhoneToCart() throws Exception {
         amazonPage.openAmazon();
         amazonPage.searchFor("iPhone 15");
         amazonPage.clickFirstResult();

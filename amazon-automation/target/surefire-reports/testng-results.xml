@@ -2,40 +2,40 @@
 <testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2026-06-09T11:35:08 IST" name="AmazonAutomationSuite" finished-at="2026-06-09T11:35:58 IST" duration-ms="50507">
+  <suite started-at="2026-06-10T11:13:20 IST" name="LambdaTestSuite" finished-at="2026-06-10T11:14:07 IST" duration-ms="46721">
     <groups>
     </groups>
-    <test started-at="2026-06-09T11:35:08 IST" name="GalaxyTest" finished-at="2026-06-09T11:35:49 IST" duration-ms="41552">
-      <class name="tests.GalaxyTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.GalaxyTest@61df66b6]" started-at="2026-06-09T11:35:08 IST" name="setUp" finished-at="2026-06-09T11:35:17 IST" duration-ms="9545" status="PASS">
+    <test started-at="2026-06-10T11:13:20 IST" name="iPhoneLambdaTest" finished-at="2026-06-10T11:14:03 IST" duration-ms="42729">
+      <class name="tests.LambdaIPhoneTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.LambdaIPhoneTest@654f0d9c]" started-at="2026-06-10T11:13:20 IST" name="setUp" finished-at="2026-06-10T11:13:32 IST" duration-ms="11207" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="searchAndAddGalaxyToCart()[pri:0, instance:tests.GalaxyTest@61df66b6]" started-at="2026-06-09T11:35:17 IST" name="searchAndAddGalaxyToCart" finished-at="2026-06-09T11:35:48 IST" duration-ms="31016" status="PASS">
+        <test-method signature="iPhoneLambdaTest()[pri:0, instance:tests.LambdaIPhoneTest@654f0d9c]" started-at="2026-06-10T11:13:32 IST" name="iPhoneLambdaTest" finished-at="2026-06-10T11:14:03 IST" duration-ms="31159" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- searchAndAddGalaxyToCart -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.GalaxyTest@61df66b6]" started-at="2026-06-09T11:35:48 IST" name="tearDown" finished-at="2026-06-09T11:35:49 IST" duration-ms="878" status="PASS">
+        </test-method> <!-- iPhoneLambdaTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.LambdaIPhoneTest@654f0d9c]" started-at="2026-06-10T11:14:03 IST" name="tearDown" finished-at="2026-06-10T11:14:03 IST" duration-ms="334" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- tests.GalaxyTest -->
-    </test> <!-- GalaxyTest -->
-    <test started-at="2026-06-09T11:35:08 IST" name="iPhoneTest" finished-at="2026-06-09T11:35:58 IST" duration-ms="50507">
-      <class name="tests.IPhoneTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.IPhoneTest@10e41621]" started-at="2026-06-09T11:35:08 IST" name="setUp" finished-at="2026-06-09T11:35:17 IST" duration-ms="9545" status="PASS">
+      </class> <!-- tests.LambdaIPhoneTest -->
+    </test> <!-- iPhoneLambdaTest -->
+    <test started-at="2026-06-10T11:13:20 IST" name="GalaxyLambdaTest" finished-at="2026-06-10T11:14:07 IST" duration-ms="46721">
+      <class name="tests.LambdaGalaxyTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.LambdaGalaxyTest@20deea7f]" started-at="2026-06-10T11:13:20 IST" name="setUp" finished-at="2026-06-10T11:13:30 IST" duration-ms="9722" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="searchAndAddIPhoneToCart()[pri:0, instance:tests.IPhoneTest@10e41621]" started-at="2026-06-09T11:35:17 IST" name="searchAndAddIPhoneToCart" finished-at="2026-06-09T11:35:58 IST" duration-ms="40174" status="PASS">
+        <test-method signature="galaxyLambdaTest()[pri:0, instance:tests.LambdaGalaxyTest@20deea7f]" started-at="2026-06-10T11:13:30 IST" name="galaxyLambdaTest" finished-at="2026-06-10T11:14:07 IST" duration-ms="36612" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- searchAndAddIPhoneToCart -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.IPhoneTest@10e41621]" started-at="2026-06-09T11:35:58 IST" name="tearDown" finished-at="2026-06-09T11:35:58 IST" duration-ms="683" status="PASS">
+        </test-method> <!-- galaxyLambdaTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.LambdaGalaxyTest@20deea7f]" started-at="2026-06-10T11:14:07 IST" name="tearDown" finished-at="2026-06-10T11:14:07 IST" duration-ms="334" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- tests.IPhoneTest -->
-    </test> <!-- iPhoneTest -->
-  </suite> <!-- AmazonAutomationSuite -->
+      </class> <!-- tests.LambdaGalaxyTest -->
+    </test> <!-- GalaxyLambdaTest -->
+  </suite> <!-- LambdaTestSuite -->
 </testng-results>

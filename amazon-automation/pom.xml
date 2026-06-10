@@ -43,10 +43,28 @@
                 <version>3.2.5</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                        <suiteXmlFile>${testng.suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <testng.suite.file>src/test/resources/testng.xml</testng.suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>lambdatest</id>
+            <properties>
+                <testng.suite.file>src/test/resources/lambdatest.xml</testng.suite.file>
+            </properties>
+        </profile>
+    </profiles>
 </project>

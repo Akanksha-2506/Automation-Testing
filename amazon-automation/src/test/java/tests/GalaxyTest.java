@@ -17,7 +17,7 @@ public class GalaxyTest {
     }
 
     @Test
-    public void searchAndAddGalaxyToCart() {
+    public void searchAndAddGalaxyToCart() throws Exception {
         amazonPage.openAmazon();
         amazonPage.searchFor("Samsung Galaxy S24");
         amazonPage.clickFirstResult();

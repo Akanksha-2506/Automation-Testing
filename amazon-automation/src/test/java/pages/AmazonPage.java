@@ -14,35 +14,74 @@ public class AmazonPage {
 
     private WebDriver driver;
     private WebDriverWait wait;
-
-    private By searchBox = By.id("twotabsearchtextbox");
-    private By searchButton = By.id("nav-search-submit-button");
-    private By searchResults = By.cssSelector("div[data-component-type='s-search-result']");
-    private By addToCartButton = By.id("add-to-cart-button");
-    private By priceWhole = By.cssSelector("span.a-price-whole");
-    private By priceFraction = By.cssSelector("span.a-price-fraction");
-    private By cartConfirmation = By.id("NATC_SMART_WAGON_CONF_MSG_SUCCESS");
-    private By closeCartPopup = By.cssSelector("button[data-action='a-popover-close']");
+    private WebDriverWait longWait;
 
     public AmazonPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        this.longWait = new WebDriverWait(driver, Duration.ofSeconds(60));
     }
 
-    public void openAmazon() {
+    public void openAmazon() throws InterruptedException {
         driver.get("https://www.amazon.com");
+        Thread.sleep(3000);
+
+        String pageSource = driver.getPageSource().toLowerCase();
+        if (pageSource.contains("captcha") || pageSource.contains("robot") || pageSource.contains("automated")) {
+            System.out.println("CAPTCHA or bot detection page encountered - retrying...");
+            Thread.sleep(3000);
+            driver.navigate().refresh();
+            Thread.sleep(3000);
+        }
+
+        try {
+            List<WebElement> dismissButtons = driver.findElements(
+                By.cssSelector("input[data-action-type='DISMISS'], .a-button-close, button[data-action='a-popover-close']")
+            );
+            if (!dismissButtons.isEmpty()) {
+                dismissButtons.get(0).click();
+                Thread.sleep(1000);
+            }
+        } catch (Exception e) {
+            System.out.println("No popup to dismiss");
+        }
+
+        longWait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
+
+        try {
+            longWait.until(ExpectedConditions.elementToBeClickable(By.id("twotabsearchtextbox")));
+        } catch (Exception e) {
+            System.out.println("Search box not immediately visible, trying alternate selector...");
+            longWait.until(ExpectedConditions.elementToBeClickable(By.name("field-keywords")));
+        }
     }
 
-    public void searchFor(String query) {
-        WebElement box = wait.until(ExpectedConditions.elementToBeClickable(searchBox));
+    public void searchFor(String query) throws InterruptedException {
+        WebElement box;
+        try {
+            box = wait.until(ExpectedConditions.elementToBeClickable(By.id("twotabsearchtextbox")));
+        } catch (Exception e) {
+            box = wait.until(ExpectedConditions.elementToBeClickable(By.name("field-keywords")));
+        }
         box.clear();
         box.sendKeys(query);
-        driver.findElement(searchButton).click();
+        Thread.sleep(500);
+
+        try {
+            driver.findElement(By.id("nav-search-submit-button")).click();
+        } catch (Exception e) {
+            box.submit();
+        }
     }
 
-    public void clickFirstResult() {
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(searchResults));
-        List<WebElement> results = driver.findElements(searchResults);
+    public void clickFirstResult() throws InterruptedException {
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
+            By.cssSelector("div[data-component-type='s-search-result']")
+        ));
+        Thread.sleep(1000);
+        List<WebElement> results = driver.findElements(
+            By.cssSelector("div[data-component-type='s-search-result']")
+        );
         for (WebElement result : results) {
             List<WebElement> titles = result.findElements(By.cssSelector("h2 a"));
             if (!titles.isEmpty()) {
@@ -50,14 +89,17 @@ public class AmazonPage {
                 break;
             }
         }
+        Thread.sleep(2000);
     }
 
     public String getProductPrice() {
         try {
-            WebElement whole = wait.until(ExpectedConditions.presenceOfElementLocated(priceWhole));
+            WebElement whole = wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.cssSelector("span.a-price-whole"))
+            );
             String wholeText = whole.getText().replaceAll("[^0-9]", "");
             String fractionText = "00";
-            List<WebElement> fractions = driver.findElements(priceFraction);
+            List<WebElement> fractions = driver.findElements(By.cssSelector("span.a-price-fraction"));
             if (!fractions.isEmpty()) {
                 fractionText = fractions.get(0).getText().replaceAll("[^0-9]", "");
             }
@@ -67,17 +109,44 @@ public class AmazonPage {
         }
     }
 
-    public void addToCart() {
-        try {
-            WebElement cartBtn = wait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", cartBtn);
+    public void addToCart() throws InterruptedException {
+        Thread.sleep(2000);
+
+        List<WebElement> directAddToCart = driver.findElements(By.id("add-to-cart-button"));
+        if (!directAddToCart.isEmpty() && directAddToCart.get(0).isDisplayed()) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", directAddToCart.get(0));
+            System.out.println("Clicked direct Add to Cart button");
             Thread.sleep(2000);
-            List<WebElement> popup = driver.findElements(closeCartPopup);
-            if (!popup.isEmpty()) {
-                popup.get(0).click();
-            }
-        } catch (Exception e) {
-            System.out.println("Add to cart step encountered an issue: " + e.getMessage());
+            return;
         }
+
+        List<WebElement> buyingOptions = driver.findElements(
+            By.cssSelector("a[title='See All Buying Options'], a[href*='offer-listing'], a[href*='buying-options']")
+        );
+        if (!buyingOptions.isEmpty()) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", buyingOptions.get(0));
+            Thread.sleep(2000);
+            List<WebElement> addBtn = driver.findElements(
+                By.cssSelector("input[name='submit.addToCart'], #add-to-cart-button")
+            );
+            if (!addBtn.isEmpty()) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", addBtn.get(0));
+                System.out.println("Clicked Add to Cart from buying options");
+                Thread.sleep(2000);
+                return;
+            }
+        }
+
+        List<WebElement> altButtons = driver.findElements(
+            By.cssSelector("button[name='submit.addToCart'], [data-action='add-to-cart'], .a-button-input")
+        );
+        if (!altButtons.isEmpty()) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", altButtons.get(0));
+            System.out.println("Clicked alternate cart button");
+            Thread.sleep(2000);
+            return;
+        }
+
+        System.out.println("No Add to Cart button found - Amazon may require login or variant selection");
     }
 }

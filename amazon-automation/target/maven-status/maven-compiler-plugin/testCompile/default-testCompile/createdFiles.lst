@@ -1,4 +1,6 @@
-tests\IPhoneTest.class
 pages\AmazonPage.class
 tests\GalaxyTest.class
+tests\LambdaIPhoneTest.class
+tests\IPhoneTest.class
+tests\LambdaGalaxyTest.class
 utils\DriverManager.class
